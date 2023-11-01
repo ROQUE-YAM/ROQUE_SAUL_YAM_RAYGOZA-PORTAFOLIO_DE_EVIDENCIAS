@@ -1,0 +1,352 @@
+LEVEL 00 
+
+ls
+ls -la
+cat readme
+exit
+
+LEVEL 01
+
+ls
+cd ..
+cat bandit1/-
+
+LEVEL 02
+
+ls -la
+cat spaces\ in\ this\ filename
+
+LEVEL 03
+
+ls -la
+cd inhere
+ls -la
+cat .hidden
+
+LEVEL 04
+
+ssh bandit4@bandit.labs.overthewire.org -p 2220
+
+ls
+cd inhere
+ls -la
+cat -- \-file07
+
+LEVEL 05
+
+ssh bandit5@bandit.labs.overthewire.org -p 2220
+
+cd inhere
+ls
+find . \
+	-type f \
+	-size 1033c	\
+	-not -executable \
+	-exec file {} + \
+	| grep ASCII
+cat maybehere07/.file2
+
+LEVEL 06
+
+ssh bandit6@bandit.labs.overthewire.org -p 2220
+cd /
+ls
+find . -type f -user bandit7 -group bandit6 -size 33c -exec file {} + | grep ASCII
+find . -type f -user bandit7 -group bandit6 -size 33c 2>/dev/null -exec file {} + | grep ASCII
+cat ./var/lib/dpkg/info/bandit7.password
+
+LEVEL 07
+
+ssh bandit7@bandit.labs.overthewire.org -p 2220
+
+
+grep -wi 'millionth' data.txt
+
+LEVEL 08
+
+ssh bandit8@bandit.labs.overthewire.org -p 2220
+
+man uniq 
+
+uniq needs sorted data
+
+cat data.txt | sort | uniq -u
+
+LEVEL 09
+
+ssh bandit9@bandit.labs.overthewire.org -p 2220
+
+strings data.txt | grep -wi '=='
+
+
+LEVEL 10
+
+ssh bandit10@bandit.labs.overthewire.org -p 2220
+
+cat data.txt | base64 --decode
+
+LEVEL 11
+
+ssh bandit11@bandit.labs.overthewire.org -p 2220
+
+cat data.txt
+
+LEVEL 12
+
+ssh bandit12@bandit.labs.overthewire.org -p 2220
+
+move the data.txt to tmp/myname123/whatever
+
+xxd -r data.txt > data
+if it is zipped(bz2) 
+mv data data.bz2
+bzip2 -d data.bz2 
+mv data data.gz
+gzip -d data.gz
+mv data data.tar
+tar -xvf data.tar 
+mv data data.bz2
+bzip2 -d data.bz2 
+
+
+LEVEL 13
+
+ssh bandit13@bandit.labs.overthewire.org -p 2220
+nano key.txt
+chmod 600 key.txt
+
+ssh -i key.txt bandit14@bandit.labs.overthewire.org -p 2220
+
+baam!!!
+
+LEVEL 14
+
+cat /etc/bandit_pass/bandit14 | nc localhost 30000
+
+LEVEL 15
+
+ssh bandit15@bandit.labs.overthewire.org -p 2220
+openssl s_client -ign_eof -connect localhost:30001
+
+LEVEL 16
+
+ssh bandit16@bandit.labs.overthewire.org -p 2220
+
+netstat  -lntu
+
+-l: It will print only listening sockets
+-n: It will display the port number
+-t: It enables the listing of TCP ports.
+-u: It enables the listing of UDP ports.
+nmap -p 31000-32000 localhost
+Or
+
+mkdir /tmp/bannn
+cd /tmp/bannn
+
+nano sshkey.private 
+
+chmod 400 sshkey.private
+
+ssh -i sshkey.private bandit17@bandit.labs.overthewire.org -p 2220
+
+LEVEL 17
+
+ssh bandit17@bandit.labs.overthewire.org -p 2220
+
+diff passwords.new passwords.old
+
+LEVEL 18
+
+ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme
+ssh bandit18@bandit.labs.overthewire.org -p 2220 /bin/bash --norc
+
+ls  
+
+cat readme
+
+LEVEL 19
+
+ssh bandit19@bandit.labs.overthewire.org -p 2220
+
+./bandit20-do
+
+OUTPUT: Run a command as another user.
+  		Example: ./bandit20-do id
+
+./bandit20-do whoami
+output: bandit20
+
+./bandit20-do id
+output: uid=11019(bandit19) gid=11019(bandit19) euid=11020(bandit20) groups=11019(bandit19)
+
+ls -l ./bandit20-do 
+-rw[s]r-x---  1 bandit20 bandit19 14872 Sep  1 06:30 bandit20-do
+
+LEVEL 20
+
+ssh bandit20@bandit.labs.overthewire.org -p 2220
+nc -lvp 4040
+
+-l == server is listening for tcp/udp
+-v == will have a verbose output
+-p == port no
+./suconnect 4040
+
+LEVEL 21
+
+ssh bandit21@bandit.labs.overthewire.org -p 2220
+
+cd /etc/cron.d/
+
+ls -la
+
+cat cronjob_bandit22 
+cat /usr/bin/cronjob_bandit22.sh
+
+LEVEL 22
+
+ssh bandit22@bandit.labs.overthewire.org -p 2220
+
+cd /etc/cron.d/
+
+ls -la
+
+cat cronjob_bandit23 
+cat /usr/bin/cronjob_bandit23.sh
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+cat /etc/bandit_pass/$myname > /tmp/$mytarget
+echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+
+LEVEL 23
+
+ssh bandit23@bandit.labs.overthewire.org -p 2220
+
+cd /etc/cron.d/
+ls -l
+
+cat cronjob_bandit24
+cat /usr/bin/cronjob_bandit24.sh
+#!/bin/bash
+
+myname=$(whoami)
+for i in * .*;
+do
+    if [ "$i" != "." -a "$i" != ".." ];
+    then
+        echo "Handling $i"
+        owner="$(stat --format "%U" ./$i)"
+        if [ "${owner}" = "bandit23" ]; then
+            timeout -s 9 60 ./$i
+        fi
+        rm -f ./$i
+    fi
+done
+cd /tmp/yYyYea
+touch pass.sh
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/yYyYea/pass
+
+touch pass
+
+chmod 777 -R /tmp/yYyYea
+
+cp pass.sh /var/spool/bandit24/foo
+
+ls -l
+total 4
+-rwxrwxrwx 1 bandit23 bandit23  0 Nov 22 17:41 pass
+-rwxrwxrwx 1 bandit23 bandit23 61 Nov 22 17:10 pass.sh
+
+
+ls -l
+total 8
+-rwxrwxrwx 1 bandit23 bandit23 33 Nov 22 17:43 pass
+-rwxrwxrwx 1 bandit23 bandit23 61 Nov 22 17:10 pass.sh
+
+cat pass
+
+LEVEL 24
+
+ssh bandit24@bandit.labs.overthewire.org -p 2220
+
+nano script.sh
+#!/bin/bash
+for i in {0000..9999}
+do
+done
+
+chmod 777 script.sh
+
+./script.sh
+
+LEVEL 25
+
+cat /etc/passwd | grep bandit26
+cat /usr/bin/showtext
+#!/bin/sh
+
+export TERM=linux
+
+exec more ~/text.txt
+exit 0
+bandit25@bandit:~$ cp ssh.private /tmp/yYyYea
+cd /tmp/yYyY
+mkdir -p .ssh
+
+LEVEL 26
+
+change the shell:
+:set shell=/bin/sh
+-rwsr-x---  1 bandit27 bandit26 14872 Sep  1 06:30 bandit27-do
+:!ls -la
+:! ./bandit27-do cat /etc/bandit_pass/bandit27
+
+LEVEL 27
+
+mkdir foo
+
+cd /tmp/foo
+cd repo
+ls 
+cat README
+
+LEVEL 28
+
+bandit28@bandit:~$ mktemp -d
+ls
+cd repo
+bandit28@bandit: cat README.me
+diff --git a/README.md b/README.md
+index b302105..5c6457b 100644
+--- a/README.md
++++ b/README.md
+
+LEVEL 29
+
+cd repo
+code  README.md
+
+LEVEL 30
+
+bandit30@bandit:/tmp/tmp.DywL2LwOM5/repo$ git tag
+secret
+bandit30@bandit:/tmp/tmp.DywL2LwOM5/repo$ git show secret
+
+LEVEL 31
+
+ssh bandit31@bandit.labs.overthewire.org -p 2220
+
+bandit31@bandit:~$ mktemp -d
+/tmp/tmp.3K2OxQOi3d
+bandit31@bandit:~$ cd /tmp/tmp.3K2OxQOi3d
+
+
+LEVEL 32
+
+$whoami
+bandit33
+
+LEVEL 33
+ssh bandit33@bandit.labs.overthewire.org -p 2220
